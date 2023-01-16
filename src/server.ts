@@ -10,9 +10,6 @@ import dotenv from 'dotenv'
 // Fetch Number of CPU Cores 
 import { cpus } from 'os'
 
-// Express App
-import app from './api/app'
-
 // Apply Environments
 if (process.env.NODE_ENV != 'production') {
 
@@ -20,6 +17,11 @@ if (process.env.NODE_ENV != 'production') {
     dotenv.config()
 
 }
+
+import { initiliazeDatabase } from './database'
+
+// Express App
+import app from './api/app'
 
 // Cluster variable
 const isClusterRequired = process.env.CLUSTER
@@ -69,27 +71,37 @@ async function setupWorkerProcesses() {
  */
 async function setUpExpressApplication() {
 
-    // HTTP Module
-    const http = require('http')
+    await initiliazeDatabase()
+        .then(() => {
 
-    // Define Application port
-    const port = process.env.PORT
+            // HTTP Module
+            const http = require('http')
 
-    // Defining the Host Name
-    const host = process.env.HOST
+            // Define Application port
+            const port = process.env.PORT
 
-    // Environment State Variable
-    const env = process.env.NODE_ENV
+            // Defining the Host Name
+            const host = process.env.HOST
 
-    // Creating Microservice Server
-    const server = http.createServer(app)
+            // Environment State Variable
+            const env = process.env.NODE_ENV
 
-    // Exposing the server to the desired port
-    server.listen(port, host, async () => {
-        process.stdout.write(`\n To Do List Server : http://${host}:${port}\n`)
-        process.stdout.write(`\n Environment : ${env}\n`)
-        process.stdout.write(`\n Process : ${process.pid} is listening to all incoming requests \n`)
-    })
+            // Creating Microservice Server
+            const server = http.createServer(app)
+
+            // Exposing the server to the desired port
+            server.listen(port, host, async () => {
+                process.stdout.write(`\n To Do List Server : http://${host}:${port}\n`)
+                process.stdout.write(`\n Environment : ${env}\n`)
+                process.stdout.write(`\n Process : ${process.pid} is listening to all incoming requests \n`)
+            })
+
+        })
+
+        .catch((error) => {
+            process.stdout.write(`\n Could not connect to database ${JSON.stringify(error)} \n`)
+            process.exit(1)
+        })
 
 }
 
