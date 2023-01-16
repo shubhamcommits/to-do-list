@@ -18,7 +18,10 @@ export class TodoControllers {
 
             // Validate the Data
             if (!task) {
-                return res.status(400).json({ error: 'Task is required in the request body!' })
+                return res.status(400).json({ 
+                    message: 'Validation Error!',
+                    error: 'Task is required in the request body!' 
+                })
             }
 
             // Call the Service Function
@@ -29,12 +32,17 @@ export class TodoControllers {
                     // Send Status 200 response
                     return res.status(200).json({
                         message: 'New To-Do Item has been created!',
+                        success: true,
                         item: data.item,
                         notifications: data.notifications
                     })
                 })
                 .catch((error) => {
-                    return res.status(400).json(error)
+                    return res.status(400).json({
+                        message: 'Unable to create the new To Do Item!',
+                        success: false,
+                        error: error
+                    })
                 })
 
         } catch (error) {
@@ -50,7 +58,10 @@ export class TodoControllers {
 
             // Validate the ID
             if (!id ) {
-                return res.status(400).json({ error: 'To Do Item ID is not present with the request!' })
+                return res.status(400).json({ 
+                    message: 'Validation Error!',
+                    error: 'To Do Item ID is not present with the request!' 
+                })
             }
 
             // Fetch the data from the request Body
@@ -58,7 +69,10 @@ export class TodoControllers {
 
             // Validate the Request Body
             if (!req.body ) {
-                return res.status(400).json({ error: 'The completed status seems missing in the request body!' })
+                return res.status(400).json({ 
+                    message: 'Validation Error!',
+                    error: 'The completed status seems missing in the request body!' 
+                })
             }
 
             // Call the Service Function
@@ -74,7 +88,11 @@ export class TodoControllers {
                     })
                 })
                 .catch((error) => {
-                    return res.status(400).json(error)
+                    return res.status(400).json({
+                        message: 'Unable to Update the To Do Item!',
+                        success: false,
+                        error: error
+                    })
                 })
 
         } catch (error) {

@@ -1,6 +1,9 @@
 // Express Module
 import express, { NextFunction, Request, Response } from 'express'
 
+// Import Sequelize
+import { db } from '../sequelize'
+
 // Cors Module
 import cors from 'cors'
 
@@ -9,9 +12,6 @@ import morgan from 'morgan'
 
 // Compression Module
 import compression from 'compression'
-
-// Import Sequelize
-import { db } from '../sequelize'
 
 // Routes
 import { todoRoutes, subRoutes } from './routes'

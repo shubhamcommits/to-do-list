@@ -17,7 +17,10 @@ export class SubscriberControllers {
 
             // Validate the Data
             if (!url) {
-                return res.status(400).json({ error: 'URL is required in the request body!' })
+                return res.status(400).json({ 
+                    message: 'Validation Error!',
+                    error: 'URL is required in the request body!' 
+                })
             }
 
             // Call the Service Function
@@ -28,11 +31,16 @@ export class SubscriberControllers {
                     // Send Status 200 response
                     return res.status(200).json({
                         message: 'New Subscriber Item has been created!',
+                        success: true,
                         subscriber: data.subscriber
                     })
                 })
                 .catch((error) => {
-                    return res.status(400).json(error)
+                    return res.status(400).json({
+                        message: 'Unable to create the new Subscriber!',
+                        success: false,
+                        error: error
+                    })
                 })
 
         } catch (error) {

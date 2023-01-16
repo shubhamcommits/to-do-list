@@ -46,6 +46,8 @@ export class TodoService {
                         resolve({ item: res, notifications: notified_subscribers })
                     })
                     .catch((error: any) => {
+
+                        // Reject the Promise
                         reject({ error: error })
                     })
 
@@ -109,6 +111,8 @@ export class TodoService {
                         })
                     })
                     .catch((error: any) => {
+
+                        // Reject the Promise
                         reject({ error: error })
                     })
 

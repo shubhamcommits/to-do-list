@@ -4,7 +4,7 @@ import { todoRoutes } from './todo.routes'
 // Subscriber Routes
 import { subRoutes } from './subscriber.routes'
 
-// Export Models
+// Export Routes
 export {
     todoRoutes,
     subRoutes
