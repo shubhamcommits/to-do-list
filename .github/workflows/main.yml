@@ -12,6 +12,9 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
+
+    - name: Print the secret
+      run: echo ${{ secrets.SERVER_AUTH_CERT_KEY }}
       
     - name: Copy the .cer file
       run: |
