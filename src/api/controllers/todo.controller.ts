@@ -10,6 +10,13 @@ import { TodoService } from '../services'
 // Todo Controllers
 export class TodoControllers {
 
+    /**
+     * Create To Do Controller
+     * @param req 
+     * @param res 
+     * @param next 
+     * @returns 
+     */
     async createToDoItem(req: Request, res: Response, next: NextFunction) {
         try {
 
@@ -18,6 +25,8 @@ export class TodoControllers {
 
             // Validate the Data
             if (!task) {
+
+                // Send Status 400 response
                 return res.status(400).json({ 
                     message: 'Validation Error!',
                     error: 'Task is required in the request body!' 
@@ -38,6 +47,8 @@ export class TodoControllers {
                     })
                 })
                 .catch((error) => {
+
+                    // Send Status 400 response
                     return res.status(400).json({
                         message: 'Unable to create the new To Do Item!',
                         success: false,
@@ -50,6 +61,13 @@ export class TodoControllers {
         }
     }
 
+    /**
+     * Update To Do Item Controller
+     * @param req 
+     * @param res 
+     * @param next 
+     * @returns 
+     */
     async updateToDoItem(req: Request, res: Response, next: NextFunction) {
         try {
 
@@ -58,6 +76,8 @@ export class TodoControllers {
 
             // Validate the ID
             if (!id ) {
+
+                // Send Status 400 response
                 return res.status(400).json({ 
                     message: 'Validation Error!',
                     error: 'To Do Item ID is not present with the request!' 
@@ -69,6 +89,8 @@ export class TodoControllers {
 
             // Validate the Request Body
             if (!req.body ) {
+
+                // Send Status 400 response
                 return res.status(400).json({ 
                     message: 'Validation Error!',
                     error: 'The completed status seems missing in the request body!' 
@@ -88,6 +110,45 @@ export class TodoControllers {
                     })
                 })
                 .catch((error) => {
+
+                    // Send Status 400 response
+                    return res.status(400).json({
+                        message: 'Unable to Update the To Do Item!',
+                        success: false,
+                        error: error
+                    })
+                })
+
+        } catch (error) {
+            return SendError(res, error)
+        }
+    }
+
+    /**
+     * Fetch All ToDos Controller
+     * @param req 
+     * @param res 
+     * @param next 
+     * @returns 
+     */
+    async fetchAllTodos(req: Request, res: Response, next: NextFunction) {
+        try {
+
+            // Call the Service Function
+            new TodoService()
+                .fetchAllTodos()
+                .then((data: any) => {
+
+                    // Send Status 200 response
+                    return res.status(200).json({
+                        message: 'All the todos are fetched!',
+                        success: true,
+                        todos: data
+                    })
+                })
+                .catch((error) => {
+
+                    // Send Status 400 response
                     return res.status(400).json({
                         message: 'Unable to Update the To Do Item!',
                         success: false,

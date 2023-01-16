@@ -7,6 +7,11 @@ import { SubscriberService } from './index'
 // Todo Service
 export class TodoService {
 
+    /**
+     * This service function creates a to do item
+     * @param task 
+     * @returns 
+     */
     async createToDoItem(task: string) {
 
         return new Promise(async (resolve, reject) => {
@@ -57,6 +62,12 @@ export class TodoService {
         })
     }
 
+    /**
+     * This function is responsible for updating a to-do item
+     * @param id 
+     * @param completed 
+     * @returns 
+     */
     async updateToDoItem(id: Number, completed: Boolean) {
 
         return new Promise(async (resolve, reject) => {
@@ -114,6 +125,33 @@ export class TodoService {
 
                         // Reject the Promise
                         reject({ error: error })
+                    })
+
+            } catch (error) {
+                reject({ error: error })
+            }
+        })
+    }
+
+    /**
+     * This function fetches all the todos in the system
+     * @returns 
+     */
+    async fetchAllTodos() {
+        return new Promise(async (resolve, reject) => {
+            try {
+
+                // Fetch the list of ToDos
+                ToDo.findAll({ raw: true })
+                    .then((res: any) => {
+
+                        // Resolve the Promise
+                        resolve(res)
+                    })
+                    .catch((error: any) => {
+
+                        // Reject the Promise with Data
+                        reject([])
                     })
 
             } catch (error) {

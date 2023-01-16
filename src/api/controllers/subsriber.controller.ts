@@ -9,6 +9,13 @@ import { SubscriberService } from '../services'
 
 export class SubscriberControllers {
 
+    /**
+     * Create Subscriber Controller
+     * @param req 
+     * @param res 
+     * @param next 
+     * @returns 
+     */
     async createSubscriber(req: Request, res: Response, next: NextFunction) {
         try {
 
@@ -48,6 +55,13 @@ export class SubscriberControllers {
         }
     }
 
+    /**
+     * Notify Subscriber Controller
+     * @param req 
+     * @param res 
+     * @param next 
+     * @returns 
+     */
     async notifySubscriber(req: Request, res: Response, next: NextFunction) {
         try {
 
@@ -56,7 +70,12 @@ export class SubscriberControllers {
 
             // Validate the Data
             if (!url || !event || !data) {
-                return res.status(400).json({ error: 'URL, Event, and Data are required in the request body!' })
+
+                // Send Status 400 response
+                return res.status(400).json({ 
+                    message: 'Validation Error!',
+                    error: 'URL, Event, and Data are required in the request body!' 
+                })
             }
 
             // Call the Service Function
@@ -67,11 +86,18 @@ export class SubscriberControllers {
                     // Send Status 200 response
                     return res.status(200).json({
                         message: 'Subsriber has been notified successfully!',
+                        success: true,
                         subscriber: data.subscriber
                     })
                 })
                 .catch((error) => {
-                    return res.status(400).json(error)
+
+                    // Send Status 400 response
+                    return res.status(400).json({
+                        message: 'Unable to notify the Subscriber!',
+                        success: false,
+                        error: error
+                    })
                 })
 
         } catch (error) {
@@ -79,6 +105,13 @@ export class SubscriberControllers {
         }
     }
 
+    /**
+     * Fetch All Subscriber Controller
+     * @param req 
+     * @param res 
+     * @param next 
+     * @returns 
+     */
     async fetchAllSubscribers(req: Request, res: Response, next: NextFunction) {
         try {
 
@@ -94,7 +127,13 @@ export class SubscriberControllers {
                     })
                 })
                 .catch((error) => {
-                    return res.status(400).json(error)
+
+                    // Send Status 400 response
+                    return res.status(400).json({
+                        message: 'Unable to fetch the subscribers!',
+                        success: false,
+                        error: error
+                    })
                 })
 
         } catch (error) {

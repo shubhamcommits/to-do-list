@@ -16,6 +16,9 @@ todoRoutes.route('/')
     // Create To Do Item
     .post(todoControllers.createToDoItem)
 
+    // Fetch All To Do Items
+    .get(todoControllers.fetchAllTodos)
+
 // Route Definition
 todoRoutes.route('/:id')
 
