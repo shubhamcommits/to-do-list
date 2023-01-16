@@ -41,6 +41,8 @@ MIN_POOL=1
 
 1.5.  Fire up a new terminal and go to `to-do-list/` and run `npm run dev` or `yarn run dev`, and your server application shall start up on port `4000`
 
+1.6. For easier understanding of the APIs, I have also attached the `To Do List.postman_collection.json` collection for the reference
+
 ---
 
 
