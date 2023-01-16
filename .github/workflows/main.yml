@@ -28,7 +28,6 @@ jobs:
           TARGET: '/home/ec2-user/apps/'
           EXCLUDE: '/node_modules/'
 
-
     - name: List files in runner's GitHub Actions workspace
       run: ls -la
 
