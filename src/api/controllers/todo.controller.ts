@@ -74,6 +74,18 @@ export class TodoControllers {
             // Fetch the ID from Request Params
             let id = Number(req.params.id)
 
+            // Fetch the To-Do Item
+            let todoItem = await new TodoService().fetchTodo(id)
+
+            // Check if ToDo Is not Null
+            if(todoItem == null){
+
+                // Send Status 404 response
+                return res.status(404).json({ 
+                    message: 'Unable to find the To Do Item'
+                })
+            }
+
             // Validate the ID
             if (!id ) {
 

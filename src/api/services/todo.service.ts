@@ -160,4 +160,35 @@ export class TodoService {
         })
     }
 
+    /**
+     * This function fetches a todo by ID
+     * @returns 
+     */
+    async fetchTodo(id: Number) {
+        return new Promise(async (resolve, reject) => {
+            try {
+
+                // Fetch the ToDo
+                ToDo.findOne({
+                    where: {
+                        id: id
+                    }
+                })
+                    .then((res: any) => {
+
+                        // Resolve the Promise
+                        resolve(res)
+                    })
+                    .catch((error: any) => {
+
+                        // Reject the Promise
+                        reject({ error: error })
+                    })
+
+            } catch (error) {
+                reject({ error: error })
+            }
+        })
+    }
+
 }
