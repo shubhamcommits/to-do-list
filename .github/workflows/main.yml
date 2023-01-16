@@ -37,6 +37,6 @@ jobs:
     - name: List files in runner's GitHub Actions workspace
       run: ls -la
 
-    # - name: Copy files to EC2 instance
-    #   run: |
-    #     scp -i ${{ secrets.SERVER_AUTH_CERT_KEY }} -r dist/* ec2-user@ec2-43-204-221-59.ap-south-1.compute.amazonaws.com:/home/ec2-user/apps/
+    - name: Copy files to EC2 instance
+      run: |
+        scp -i "${{ secrets.SERVER_AUTH_CERT_KEY }}" -r dist/* ec2-user@ec2-43-204-221-59.ap-south-1.compute.amazonaws.com:/home/ec2-user/apps/
