@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "4b59d173-6815-441b-a845-98ed4728ffad",
+		"name": "To Do List",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25078168"
+	},
+	"item": [
+		{
+			"name": "Subscribers",
+			"item": [
+				{
+					"name": "Create Subscriber",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"https://dummyjson.com/carts\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/subscribers/",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"subscribers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Notify Subscriber",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"url\": \"https://dummyjson.com/carts\",\n    \"event\": \"todo_in-progress\",\n    \"data\": {\n        \"completed\": false,\n        \"status\": \"added\",\n        \"id\": 6,\n        \"task\": \"Test Task\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/subscribers/notify",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"subscribers",
+								"notify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch All Subscribers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/subscribers/",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"subscribers",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "To Do Items",
+			"item": [
+				{
+					"name": "Create To Do Item",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"task\": \"Test Task\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/todos/",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"todos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch All To Dos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/todos/",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"todos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update To Do Item",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"completed\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_API_URL}}/todos/4",
+							"host": [
+								"{{BASE_API_URL}}"
+							],
+							"path": [
+								"todos",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
