@@ -12,10 +12,9 @@ jobs:
     steps:
     - name: Checkout Code
       uses: actions/checkout@v2
-
+      
     - name: Copy the .cer file
       run: |
-        touch gen-application-key.cer
         echo ${{ secrets.SERVER_AUTH_CERT_KEY }} | base64 --decode > gen-application-key.cer
 
     - name: Configure AWS credentials
