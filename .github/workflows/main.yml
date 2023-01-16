@@ -18,19 +18,5 @@ jobs:
         yarn install
         yarn run build
 
-    - name: Deploy to my EC2 instance
-      uses: easingthemes/ssh-deploy@v2.1.5
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.AWS_SERVER_CERT_KEY }}
-        SOURCE: 'dist/'
-        REMOTE_HOST: ${{ secrets.AWS_EC2_HOST }}
-        REMOTE_USER: ${{ secrets.AWS_EC2_USER }}
-        TARGET: '/home/ec2-user/apps/'
-        EXCLUDE: '/node_modules/'
-
     - name: List files in runner's GitHub Actions workspace
       run: ls -la
-
-    - name: Copy files to EC2 instance
-      run: |
-        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SERVER_CERT_KEY }} -r dist/* ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }}:/home/ec2-user/apps/
