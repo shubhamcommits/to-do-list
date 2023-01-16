@@ -27,4 +27,4 @@ jobs:
 
     - name: Copy files to EC2 instance
       run: |
-        scp -i ${{ secrets.CERT_FILE }} -r $PWD/dist/* ec2-user@ec2-43-204-221-59.ap-south-1.compute.amazonaws.com:/home/ec2-user/apps/
+        scp -i ${{ secrets.CERT_FILE }} -r dist/* ec2-user@ec2-43-204-221-59.ap-south-1.compute.amazonaws.com:/home/ec2-user/apps/
