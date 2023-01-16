@@ -25,14 +25,14 @@ jobs:
         yarn install
         yarn run build
 
-    - name: Copy files to EC2
-      uses: appleboy/scp-action@v1
-      with:
-        host: ${{ secrets.AWS_EC2_HOST }}
-        username: ${{ secrets.AWS_EC2_USER }}
-        key: ${{ secrets.SERVER_AUTH_CERT_KEY }}
-        source: dist/
-        target: /home/ec2-user/apps
+    # - name: Copy files to EC2
+    #   uses: appleboy/scp-action@v1
+    #   with:
+    #     host: ${{ secrets.AWS_EC2_HOST }}
+    #     username: ${{ secrets.AWS_EC2_USER }}
+    #     key: ${{ secrets.SERVER_AUTH_CERT_KEY }}
+    #     source: dist/
+    #     target: /home/ec2-user/apps
 
     - name: Copy files to EC2 instance
       run: |
