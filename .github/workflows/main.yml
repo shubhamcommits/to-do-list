@@ -13,37 +13,14 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
 
-    - name: Print the secret
-      run: echo ${{ secrets.SERVER_AUTH_CERT_KEY }}
-      
-    - name: Copy the .cer file
-      run: |
-        echo ${{ secrets.SERVER_AUTH_CERT_KEY }} | base64 --decode > gen-application-key.cer
-
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1
-      with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
-        aws-region: ap-south-1
-
     - name: Build the code
       run: |
         yarn install
         yarn run build
-
-    # - name: Copy files to EC2
-    #   uses: appleboy/scp-action@v1
-    #   with:
-    #     host: ${{ secrets.AWS_EC2_HOST }}
-    #     username: ${{ secrets.AWS_EC2_USER }}
-    #     key: ${{ secrets.SERVER_AUTH_CERT_KEY }}
-    #     source: dist/
-    #     target: /home/ec2-user/apps
 
     - name: List files in runner's GitHub Actions workspace
       run: ls -la
 
     - name: Copy files to EC2 instance
       run: |
-        scp -o StrictHostKeyChecking=no -i "gen-application-key.cer" -r dist/* ec2-user@ec2-43-204-221-59.ap-south-1.compute.amazonaws.com:/home/ec2-user/apps/
+        scp -o StrictHostKeyChecking=no -i ${{ secrets.AWS_SERVER_CERT_KEY }} -r dist/* ${{ secrets.AWS_EC2_USER }}@${{ secrets.AWS_EC2_HOST }}:/home/ec2-user/apps/
